@@ -1,10 +1,10 @@
 # cssoj
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure library designed to compile clojure to css, under construction
 
 ## Usage
 
-FIXME
+FULL DOCUMENTATION COMES LATER
 
 ## License
 
