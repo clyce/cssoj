@@ -6,35 +6,37 @@ Now supports:
 
  - generate raw styles using (style ...) function, e.g:
 
-	```clojure
+```clojure
 (style {:background :#FFF :color :#333}
        [:padding :10px :margin :5px]
 	   "float: left; text-align: center;")
-	```
+```
 
 	generates
 
-	```css
+```css
 background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:center;
-	```
+```
 
  - build mixin styles using (style ...) function, e.g:
 	
-	```clojure
+```clojure
 (defn test-style [float]
  (style [:float float :text-align center]))
+
 (style 
   (style {:background :#FFF :color :#333}
          [:padding :10px])
   [:margin :5px]
   (test-style :left))
-	```
+```
 	generates
 
-	```css
+```css
 background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:center;
-	```
+```
 
+README NOT FINISHED... THERE ARE MORE....
 
 ## Usage
 
