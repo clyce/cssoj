@@ -2,8 +2,8 @@
 
 (defn- keyword2str [coll]
   (if (coll? coll)
-      ((if (map? coll) 
-         mapcat map) keyword2str coll)  
+    ((if (map? coll) 
+       mapcat map) keyword2str coll)  
     (if (keyword? coll)
       (apply str (rest (str coll)))
       coll)))
@@ -48,7 +48,7 @@
   (let [ele (keyword2str ele)]
     (apply str
            (str ele "{" 
-                (style stl) 
+                (apply style stl) 
                 "}\n")
            (map 
              #(apply-to (concat [(process-nest ele  (first %))] 
