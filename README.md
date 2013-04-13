@@ -8,14 +8,33 @@ Now supports:
 
 	```clojure
 (style {:background :#FFF :color :#333}
-       [:padding :10px :margin :5px])
+       [:padding :10px :margin :5px]
+	   "float: left; text-align: center;")
 	```
 
 	generates
 
 	```css
-background:#FFF; color:#333; padding:10px; margin:5px;
+background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:center;
 	```
+
+ - build mixin styles using (style ...) function, e.g:
+	
+	```clojure
+(defn test-style [float]
+ (style [:float float :text-align center]))
+(style 
+  (style {:background :#FFF :color :#333}
+         [:padding :10px])
+  [:margin :5px]
+  (test-style :left))
+	```
+	generates
+
+	```css
+background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:center;
+	```
+
 
 ## Usage
 
