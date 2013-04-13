@@ -1,12 +1,14 @@
 (ns cssoj.core)
 
-(defn- keyword2str [coll]
+(defn- value-to-str [coll]
   (if (coll? coll)
     ((if (map? coll) 
-       mapcat map) keyword2str coll)  
+       mapcat map) value-to-str coll)  
     (if (keyword? coll)
       (apply str (rest (str coll)))
-      coll)))
+      (if (string? coll)
+        coll
+        (str coll)))))
 
 (defn- process-attr [attr]
   (if (string? attr) 
@@ -17,7 +19,7 @@
              (reduce #(str % " " %2) attr)))))
 
 (defn- process-pair [pair]
-  (let [pair (keyword2str pair)]
+  (let [pair (value-to-str pair)]
     (if (coll? pair)
       (apply str
              (map #(let [[k v] %] (str k ": " (process-attr v) "; ")) 
@@ -25,7 +27,7 @@
       pair)))
 
 (defn process-nest [p c]
-  (let [c (keyword2str c)]
+  (let [c (value-to-str c)]
     (condp = (first c)
       \& (str p c)
       (str p " " c))))
@@ -45,13 +47,13 @@
               style-list)))
 
 (defn onto [[ele stl & children]] 
-  (let [ele (keyword2str ele)]
+  (let [ele (value-to-str ele)]
     (apply str
            (str ele "{" 
                 (apply style stl) 
                 "}\n")
            (map 
-             #(apply-to (concat [(process-nest ele  (first %))] 
+             #(onto (concat [(process-nest ele  (first %))] 
                                 (rest %)))
              children))))
 
