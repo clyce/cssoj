@@ -1,5 +1,5 @@
 (ns cssoj.css3
-  (:using cssoj.core))
+  (:use cssoj.core))
 
 (defn border 
   [& {:keys [attrs image radius shadow]}]
@@ -13,8 +13,8 @@
     (if radius
       (style [:border-radius radius]
              [:-moz-border-radius radius]))
-    (if bax-shadow
-      (style [:box-shadow box-shadow]))))
+    (if shadow
+      (style [:box-shadow shadow]))))
 
 (defn background
   [& {:keys [attrs clip origin size]}]
@@ -72,10 +72,10 @@
         :-webkit-perspective persp]) 
 
      (if child3d
-       [:transform-style preserve-3d
-        :-webkit-transform-style preserve-3d]
-       [:transform-style flat
-        :-webkit-transform-style flat])
+       [:transform-style :preserve-3d
+        :-webkit-transform-style :preserve-3d]
+       [:transform-style :flat
+        :-webkit-transform-style :flat])
 
      (if origin
        [:transform-origin origin 
