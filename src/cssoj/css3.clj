@@ -39,6 +39,11 @@
   ;TODO: complete this
   )
 
+(defn gen-css-matrix [coll]
+  (if (= 6 (count coll))
+    (str "matrix(" (apply str (interleave coll (repeat (dec (count coll)) ","))) ")")
+    (str "matrix3d(" (apply str (interleave coll (repeat (dec (count coll)) ","))) ")")))
+
 (defn transform
   [& {:keys [translate
              rotate 
@@ -53,7 +58,7 @@
       :or {backface true
            child3d true}}]
   (style 
-    [(if backface
+    (if backface
        [:backface-visibility :visible
         :-webkit-backface-visibility :visible 
         :-moz-backface-visibility :visible 
@@ -112,4 +117,4 @@
           :-ms-transform t 
           :-moz-transform t 
           :-webkit-transform t 
-          :-o-transform t]))]))
+          :-o-transform t]))))
