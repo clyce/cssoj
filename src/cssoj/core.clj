@@ -23,7 +23,7 @@
     (if (coll? pair)
       (apply str
              (map #(let [[k v] %] (str k ": " (process-attr v) "; ")) 
-                  (if (map? pair) pair (apply hash-map pair)))) 
+                  (partition 2 (if (map? pair) (apply concat pair) pair)))) 
       pair)))
 
 (defn process-nest [p c]
