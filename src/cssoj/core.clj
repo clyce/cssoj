@@ -6,7 +6,7 @@
                      (repeat (dec (count coll)) 
                              sep))))
 
-(defn- value-to-str [coll]
+(defn value-to-str [coll]
   (if (coll? coll)
     ((if (map? coll) 
        mapcat map) value-to-str coll)  
@@ -41,7 +41,7 @@
 (defn prettify [css-string]
   (apply str 
     (map #(condp = %
-            \{ " {\n  "
+            \{ "{\n  "
             \} "\n}\n"
             \; ";\n  "
             %)
@@ -55,7 +55,7 @@
 (defn onto [[ele stl & children]] 
   (let [ele (value-to-str ele)]
     (apply str
-      (str ele "{" 
+      (str ele " {" 
         (apply style stl) 
         "}\n")
       (map 

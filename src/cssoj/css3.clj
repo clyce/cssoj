@@ -1,5 +1,5 @@
 (ns cssoj.css3
-  (:use cssoj.core))
+  (:use [cssoj.core]))
 
 (defn border 
   [& {:keys [attrs image radius shadow]}]
@@ -120,28 +120,44 @@
           :-o-transform t]))))
 
 (defn transition
-  [& transations] 
+  [& transitions] 
+  ;TODO: test me
   (let 
     [v ((partial sep-to-str ", ")
-          (doseq [t (value-to-str transations)]
-            (let (if (map? t)
-                   [{:keys [prop duration timing start]} t]
-                   [[prop duration timing start] t])
+          (for [t (value-to-str transitions)]
+            (let [[prop duration timing start] t]
               (str prop " " 
                    (str duration 
                         (if (number? duration) "s")) " "
                    timing " "
                    (str start
                         (if (number? start) "s"))))))]
-    (style [:transation v
-            :-moz-transation v
-            :-o-transation v
-            :-webkit-transation v])))
+    (style [:transition v
+            :-moz-transition v
+            :-o-transition v
+            :-webkit-transition v])))
 
 (defn apply-transition
   [ele transitions & {:keys [on to]}]
-  (let [[ele transations] (value-to-str [ele transations])] 
+  ;TODO: test me
+  (let [[ele transitions] (value-to-str [ele transitions])] 
     (if on
       (let [[on to] (value-to-str [on to])] 
-        (onto [ele [(transation transations)] [(str "&" on) [to]]]))
-      (onto [ele [(transition transations)]]))))
+        (onto [ele [(transition transitions)] [(str "&" on) [to]]]))
+      (onto [ele [(transition transitions)]]))))
+
+(defn keyframe
+  [kfname & key-points]
+  ;TODO: test me
+  (let [flow 
+        (str " " kfname " {"
+             (apply apply-to 
+                    (map #(list (str (value-to-str (first %)) 
+                                     (if (number? (first %)) "%"))
+                                (second %)) key-points))
+             "}\n"
+             )]
+    (str "@keyframes" flow
+         "@-moz-keyframes" flow
+         "@-webkit-keyframes" flow
+         "@-o-keyframes" flow)))
