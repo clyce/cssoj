@@ -118,3 +118,30 @@
           :-moz-transform t 
           :-webkit-transform t 
           :-o-transform t]))))
+
+(defn transition
+  [& transations] 
+  (let 
+    [v ((partial sep-to-str ", ")
+          (doseq [t (value-to-str transations)]
+            (let (if (map? t)
+                   [{:keys [prop duration timing start]} t]
+                   [[prop duration timing start] t])
+              (str prop " " 
+                   (str duration 
+                        (if (number? duration) "s")) " "
+                   timing " "
+                   (str start
+                        (if (number? start) "s"))))))]
+    (style [:transation v
+            :-moz-transation v
+            :-o-transation v
+            :-webkit-transation v])))
+
+(defn apply-transition
+  [ele transitions & {:keys [on to]}]
+  (let [[ele transations] (value-to-str [ele transations])] 
+    (if on
+      (let [[on to] (value-to-str [on to])] 
+        (onto [ele [(transation transations)] [(str "&" on) [to]]]))
+      (onto [ele [(transition transations)]]))))
