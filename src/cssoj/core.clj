@@ -45,7 +45,7 @@
   [p c]
   (let [c (value-to-str c)]
     (condp = (first c)
-      \& (str p c)
+      \& (str p (apply str (rest c)))
       (str p " " c))))
 
 (defn prettify 
