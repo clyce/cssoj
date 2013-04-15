@@ -175,28 +175,28 @@
 (defn appearance 
   ;TODO: write the doc 
   [x]
-  (cssbunch :appearance x :moz :webkit))
+  (style (cssbunch :appearance x :moz :webkit)))
 
 (defn box-sizing 
   ;TODO: write the doc 
   [x]
-  (cssbunch :box-sizing x :moz :webkit))
+  (style (cssbunch :box-sizing x :moz :webkit)))
 
 (defn offline-offset 
   ;TODO: write the doc 
   [x]
-  (cssbunch :appearance (add-unit "px" x)))
+  (style (cssbunch :appearance (add-unit "px" x))))
 
 (defn resize
   ;TODO: write the doc 
   [x]
-  (cssbunch :resize x))
+  (style (cssbunch :resize x)))
 
 (defn nav
   ;TODO: write the doc 
   [{:keys [up down left right index]}]
-  (if up (cssbunch :nav-up up))
-  (if down (cssbunch :nav-up down))
-  (if left (cssbunch :nav-up left))
-  (if right (cssbunch :nav-up right))
-  (if index (cssbunch :nav-up index)))
+  (if up (style (cssbunch :nav-up up)))
+  (if down (style (cssbunch :nav-up down)))
+  (if left (style (cssbunch :nav-up left)))
+  (if right (style (cssbunch :nav-up right)))
+  (if index (style (cssbunch :nav-up index))))

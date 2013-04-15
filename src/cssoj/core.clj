@@ -27,8 +27,8 @@
     attr
     (apply str 
       (if (some coll? attr) 
-        (reduce #(str % ", " %2) (map process-attr attr)) 
-        (reduce #(str % " " %2) attr)))))
+        (reduce #(str % ", " %2) (map process-attr (remove nil? attr))) 
+        (reduce #(str % " " %2) (remove nil? attr))))))
 
 (defn- process-pair 
   ;TODO: write the doc 
@@ -55,7 +55,7 @@
     (map #(condp = %
             \{ "{\n  "
             \} "\n}\n"
-            \; ";\n  "
+            \; ";\n "
             %)
       css-string)))
 
@@ -63,8 +63,7 @@
   ;TODO: write the doc 
   [& style-list]
   (apply str
-    (map process-pair
-      style-list)))
+    (map process-pair style-list)))
 
 (defn onto 
   ;TODO: write the doc 
