@@ -4,9 +4,9 @@
   ;TODO: write the doc 
   [sep coll]
   (apply str
-         (interleave coll 
-                     (repeat (dec (count coll)) 
-                             sep))))
+         (butlast 
+           (interleave coll
+             (repeat (count coll) sep)))))
 
 (defn value-to-str 
   ;TODO: write the doc 
