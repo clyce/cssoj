@@ -195,8 +195,9 @@
 (defn nav
   ;TODO: write the doc 
   [{:keys [up down left right index]}]
-  (if up (style (cssbunch :nav-up up)))
-  (if down (style (cssbunch :nav-up down)))
-  (if left (style (cssbunch :nav-up left)))
-  (if right (style (cssbunch :nav-up right)))
-  (if index (style (cssbunch :nav-up index))))
+  (style
+    (if up (cssbunch :nav-up up)) 
+    (if down (cssbunch :nav-down down)) 
+    (if left (cssbunch :nav-left left)) 
+    (if right (cssbunch :nav-right right)) 
+    (if index (cssbunch :nav-index index))))
