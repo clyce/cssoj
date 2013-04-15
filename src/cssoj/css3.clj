@@ -54,11 +54,19 @@
   (if word-wrap
     (style (cssbunch :word-wrap word-wrap))))
 
-(defn custom-font
+(defn font
   ;TODO: write the doc 
-  [& {:keys []}]
+  [family src & {:keys [fstretch fstyle fweight unicode-range]}]
   ;TODO: test me  
-  )
+  (onto ["@fontface" [[:font-family family :src src]
+                      (if fstretch
+                        [:font-stretch fstretch])
+                      (if fstyle
+                        [:font-style fstyle])
+                      (if fweight
+                        [:font-weight fweight])
+                      (if unicode-range
+                        [:unicode-range unicode-range])]]))
 
 (defn gen-css-matrix 
   ;TODO: write the doc 
