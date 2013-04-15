@@ -1,7 +1,7 @@
 (ns cssoj.css3
   (:use [cssoj.core]))
 
-(defn gen-css-func 
+(defn cssfunc 
   ;TODO: write doc
   [fname unit & args]
   (str fname "(" (sep-to-str "," (map (partial add-unit unit) args)) ")"))
@@ -39,13 +39,25 @@
          (if size (cssbunch :background-size size :moz))))
 
 (defn text
-  [& {:keys []}]
-  ;TODO: complete this
-  )
+  ;TODO: write the doc 
+  [& {:keys [justify overflow shadow word-break word-wrap]}]
+  ;TODO: test me  
+  (if justify
+    (style [:text-align justify]
+           (cssbunch :text-justify justify)))
+  (if overflow
+    (style (cssbunch :text-overflow overflow)))
+  (if shadow
+    (style (cssbunch :text-shadow shadow)))
+  (if word-break
+    (style (cssbunch :word-break word-break)))
+  (if word-wrap
+    (style (cssbunch :word-wrap word-wrap))))
 
 (defn custom-font
+  ;TODO: write the doc 
   [& {:keys []}]
-  ;TODO: complete this
+  ;TODO: test me  
   )
 
 (defn gen-css-matrix 
@@ -76,23 +88,23 @@
                                   [(if translate 
                                      (let [[x y z] translate] 
                                        (if z 
-                                         (gen-css-func "translate3d" "px" x y z) 
-                                         (gen-css-func "translate" "px" x y))))
+                                         (cssfunc "translate3d" "px" x y z) 
+                                         (cssfunc "translate" "px" x y))))
                                    (if rotate
                                      (if (coll? rotate)
                                        (let [[x y z] rotate]
-                                         (str (gen-css-func "rotateX" "deg" x) " " 
-                                              (gen-css-func "rotateY" "deg" y) " " 
-                                              (gen-css-func "deg" "rotateZ" z)))
-                                       (gen-css-func "rotate" "deg" rotate)))
+                                         (str (cssfunc "rotateX" "deg" x) " " 
+                                              (cssfunc "rotateY" "deg" y) " " 
+                                              (cssfunc "deg" "rotateZ" z)))
+                                       (cssfunc "rotate" "deg" rotate)))
                                    (if scale
                                      (let [[x y z] scale] 
                                        (if z 
-                                         (gen-css-func "scale3d" "%" x y z) 
-                                         (gen-css-func "scale" "%" x y))))
+                                         (cssfunc "scale3d" "%" x y z) 
+                                         (cssfunc "scale" "%" x y))))
                                    (if skew
                                      (let [[x y] skew] 
-                                       (gen-css-func "skew" "deg" x y)))])
+                                       (cssfunc "skew" "deg" x y)))])
                      :ms :moz :webkit :o))))
 
 (defn transition
@@ -162,3 +174,32 @@
            (cssbunch :column-rule-width (add-unit "px" rule-width) :moz :webkit))
          (if colspan
            (cssbunch column-span colspan :moz :webkit))))
+
+(defn appearance 
+  ;TODO: write the doc 
+  [x]
+  (cssbunch :appearance x :moz :webkit))
+
+(defn box-sizing 
+  ;TODO: write the doc 
+  [x]
+  (cssbunch :box-sizing x :moz :webkit))
+
+(defn offline-offset 
+  ;TODO: write the doc 
+  [x]
+  (cssbunch :appearance (add-unit "px" x)))
+
+(defn resize
+  ;TODO: write the doc 
+  [x]
+  (cssbunch :resize x))
+
+(defn nav
+  ;TODO: write the doc 
+  [{:keys [up down left right index]}]
+  (if up (cssbunch :nav-up up))
+  (if down (cssbunch :nav-up down))
+  (if left (cssbunch :nav-up left))
+  (if right (cssbunch :nav-up right))
+  (if index (cssbunch :nav-up index)))
