@@ -21,6 +21,7 @@ background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:ce
 	
 ```clojure
 (defn test-style [float]
+;;;this defines a function with an arg "float"
   (style [:float float :text-align center]))
 
 (style 
@@ -29,7 +30,7 @@ background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:ce
   [:margin :5px]
   (test-style :left))
 ```
-	generates
+generates
 
 ```css
 background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:center;
@@ -39,13 +40,13 @@ background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:ce
 
 ```clojure
 (apply-to 
- [:#test-div [{:background :#FFF :color :#333}
-              [:padding :10px :margin :5px]]]
- [:#test-div2 [[:background :#DDD :color :#000]]
-  [:ul [[:margin :10px]]
-   [:li [(test-style :left)]]]])
+  [:#test-div [{:background :#FFF :color :#333}
+               [:padding :10px :margin :5px]]]
+  [:#test-div2 [[:background :#DDD :color :#000]]
+   [:ul [[:margin :10px]]
+    [:li [(test-style :left)]]]])
 ```
-	generates
+generates
 
 ```css
 #test-div{background:#FFF; color:#333; padding:10px; margin:5px;}
@@ -60,13 +61,13 @@ background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:ce
 (println
   (prettify
     (apply-to 
-     [:#test-div [{:background :#FFF :color :#333}
-                  [:padding :10px :margin :5px]]]
-     [:#test-div2 [[:background :#DDD :color :#000]]
-      [:ul [[:margin :10px]]
-       [:li [(test-style :left)]]]])))
+      [:#test-div [{:background :#FFF :color :#333}
+                   [:padding :10px :margin :5px]]]
+      [:#test-div2 [[:background :#DDD :color :#000]]
+       [:ul [[:margin :10px]]
+        [:li [(test-style :left)]]]])))
 ```
-	prints
+outputs
 
 ```css
 #test-div{
