@@ -39,11 +39,9 @@ background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:ce
 
 ```clojure
 (apply-to 
- [:#test-div
-  [{:background :#FFF :color :#333}
-   [:padding :10px :margin :5px]]]
- [:#test-div2
-  [[:background :#DDD :color :#000]]
+ [:#test-div [{:background :#FFF :color :#333}
+              [:padding :10px :margin :5px]]]
+ [:#test-div2 [[:background :#DDD :color :#000]]
   [:ul [[:margin :10px]]
    [:li [(test-style :left)]]]])
 ```
@@ -62,11 +60,9 @@ background:#FFF; color:#333; padding:10px; margin:5px; float:left; text-align:ce
 (println
   (prettify
     (apply-to 
-     [:#test-div
-      [{:background :#FFF :color :#333}
-       [:padding :10px :margin :5px]]]
-     [:#test-div2
-      [[:background :#DDD :color :#000]]
+     [:#test-div [{:background :#FFF :color :#333}
+                  [:padding :10px :margin :5px]]]
+     [:#test-div2 [[:background :#DDD :color :#000]]
       [:ul [[:margin :10px]]
        [:li [(test-style :left)]]]])))
 ```
@@ -140,6 +136,6 @@ TODO: WRITE THIS
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 clyce
 
 Distributed under the Eclipse Public License, the same as Clojure.
